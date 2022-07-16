@@ -1,12 +1,11 @@
 //
-//  DIZUserModel.m
+//  DIZModelDefine.m
 //  Diz
 //
-//  Created by Deniffer on 2022/6/13.
+//  Created by Deniffer on 2022/7/16.
 //
 
-#import "DIZUserModel.h"
-
+#import "DIZModelDefine.h"
 
 @implementation DIZUserModel
 
@@ -24,7 +23,7 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return  @{
-        @"courseId" : @"",
+        @"courseId" : @"course_id",
         @"role" : @""
     };
 }
@@ -35,9 +34,9 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-        @"directoryId" : @"",
-        @"dirName" : @"",
-        @"courseId" : @""
+        @"directoryId" : @"directory_id",
+        @"dirName" : @"name",
+        @"courseId" : @"course_id"
     };
 }
 
@@ -48,13 +47,14 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-        @"classId" : @"",
-        @"className" : @"",
-        @"beginDate" : @"",
-        @"duration" : @"",
-        @"inviteCode" : @"",
-        @"createdDate" :@"",
-        @"memberCount" :@""
+        @"courseId" : @"course_id",
+        @"className" : @"name",
+        @"beginDate" : @"begin_at",
+        @"duration" : @"duration",
+        @"inviteCode" : @"invite_code",
+        @"createdDate" :@"created_at",
+        @"members" : @"members",
+        @"directories" : @"directories",
     };
 }
 
@@ -76,5 +76,6 @@
 
 @end
 
+@implementation DIZModelDefine
 
-
+@end

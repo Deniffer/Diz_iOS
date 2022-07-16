@@ -1,8 +1,8 @@
 //
-//  DIZUserModel.h
+//  DIZModelDefine.h
 //  Diz
 //
-//  Created by Deniffer on 2022/6/13.
+//  Created by Deniffer on 2022/7/16.
 //
 
 #import <Foundation/Foundation.h>
@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger,DIZClassPostType) {
 /// DIZClassModel store the whole class reated Info
 @interface DIZClassModel : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, assign) NSUInteger classId;
+@property (nonatomic, assign) NSUInteger courseId;
 @property (nonatomic, copy) NSString *className;
 @property (nonatomic, copy) NSString *beginDate;
 @property (nonatomic, assign) NSInteger duration; // class duration, if duration == -1  means long term
@@ -52,7 +52,6 @@ typedef NS_ENUM(NSUInteger,DIZClassPostType) {
 @property (nonatomic, copy) NSString *createdDate;
 @property (nonatomic, copy) NSArray<DIZMemberModel *> *members;
 @property (nonatomic, copy) NSArray <DIZDirectoryModel *> *directories;
-@property (nonatomic, assign) NSUInteger membersCount;
 
 @end
 
@@ -87,7 +86,8 @@ typedef NS_ENUM(NSUInteger,DIZClassPostType) {
 
 @end
 
+@interface DIZModelDefine : NSObject
 
-
+@end
 
 NS_ASSUME_NONNULL_END

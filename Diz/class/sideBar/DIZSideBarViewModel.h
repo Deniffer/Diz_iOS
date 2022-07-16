@@ -8,8 +8,15 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class DIZClassModel,DIZDirectoryModel;
 
 @interface DIZSideBarViewModel : NSObject
+
+@property (nonatomic, copy, readonly) NSArray<DIZClassModel *> *courses;
+@property (nonatomic, copy, readonly) NSArray<DIZDirectoryModel *> *directories;
+
+- (void)getFullCourses;
+- (void)getCourseDetail:(NSUInteger)CourseId;
 
 @end
 

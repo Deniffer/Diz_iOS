@@ -6,6 +6,8 @@
 //
 
 #import "DIZSideBarViewModel.h"
+#import "DIZClassApi.h"
+#import "DIZModelDefine.h"
 
 @interface DIZSideBarViewModel ()
 
@@ -13,8 +15,40 @@
 @property (nonatomic, copy) NSString *classDescription;
 @property (nonatomic, strong) NSMutableArray *dirArray;
 
+@property (nonatomic, copy, readwrite) NSArray<DIZClassModel *> *courses;
+@property (nonatomic, copy, readwrite) NSArray<DIZDirectoryModel *> *directories;
+
+@property (nonatomic, strong) DIZClassApi *api;
+
 @end
 
 @implementation DIZSideBarViewModel
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _api = [[DIZClassApi alloc] init];
+        [self getFullCourses];
+    }
+    return self;
+}
+
+- (void)getFullCourses {
+    [self.api getCourses:^(id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            // show newtork error toast
+            return;
+        }
+        self.courses = [MTLJSONAdapter modelsOfClass:[DIZClassModel class] fromJSONArray:responseObject[@"courses"] error:nil];
+    }];
+}
+
+- (void)getCourseDetail:(NSUInteger)CourseId {
+    [self.api getTargetCourseDetails:CourseId callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
+            if (error) {
+                return;
+            }
+            self.directories = [MTLJSONAdapter modelsOfClass:[DIZDirectoryModel class] fromJSONArray:responseObject[@""] error:nil];
+    }];
+}
 
 @end

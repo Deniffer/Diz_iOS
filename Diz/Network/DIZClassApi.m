@@ -7,7 +7,7 @@
 
 #import "DIZClassApi.h"
 #import "DIZNetworkManager.h"
-#import "DIZUserModel.h"
+#import "DIZModelDefine.h"
 
 @interface DIZClassApi()
 
@@ -20,14 +20,23 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _manager = [[DIZNetworkManager alloc] initWithBaseUrl:[NSURL URLWithString:@"http://asueeer.com:8888"]];
+        _manager = [[DIZNetworkManager alloc] initWithBaseUrl:[NSURL URLWithString:@"https://asueeer.com"]];
     }
     return self;
 }
 
-- (void)getCourseList:(DIZNetworkCallbackBlock)callback {
+- (void)getCourses:(DIZNetworkCallbackBlock)callback {
     [self.manager GET:@"/courses?mock_login=123" params:nil callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
         !callback ?: callback(responseObject,error);
+    }];
+}
+
+- (void)getTargetCourseDetails:(NSUInteger)courseId callback:(DIZNetworkCallbackBlock)callback {
+    NSDictionary *params = @{
+        @"course_id": @(courseId)
+    };
+    [self.manager GET:@"/course?mock_login=123" params:params callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
+        !callback ?: callback(responseObject ,error);
     }];
 }
 
