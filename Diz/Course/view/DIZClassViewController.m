@@ -13,7 +13,6 @@
 #import "DIZClassViewModel.h"
 #import "DIZSideBarViewModel.h"
 
-
 #define kDIZVisuableCellCount 5
 #define kDIZPostCellHeight 170
 

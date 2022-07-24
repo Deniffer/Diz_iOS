@@ -6,6 +6,7 @@
 //
 
 #import "DIZPostTableViewCell.h"
+#import "DIZModelDefine.h"
 
 @interface DIZPostTableViewCell ()
 
@@ -41,16 +42,29 @@
         UILabel *label = [[UILabel alloc] init];
         label;
     });
-    self.lastEditLabel = ({
-        UILabel *label = [[UILabel alloc] init];
-        label;
-    });
     self.starUserAvatarView = [[UIView alloc] init];
     self.tagListView = [[UIView alloc] init];
+    
 }
 
-- (void)updateCellWithData:(DIZPostAbstraction *)data {
-    
+- (void)updateCellWithData:(DIZPostModel *)data {
+    self.titleLabel.text = data.title;
+    self.contentLabel.text = data.abstractContent;
+    self.lastEditLabel.text = data.lastEditDate;
+}
+
+//- (void)createTagViewWithData:(NSArray<NSString *> *)tagList {
+//    for (NSString *tag in tagList) {
+//
+//    }
+//}
+
+- (UIColor *)randomColor {
+    CGFloat redValue = arc4random_uniform(255) / 255.0;
+    CGFloat greenValue = arc4random_uniform(255) / 255.0;
+    CGFloat blueValue = arc4random_uniform(255) / 255.0;
+    CGFloat alphaValue = arc4random_uniform(255) / 255.0;
+    return [UIColor colorWithRed:redValue green:greenValue blue:blueValue alpha:alphaValue];
 }
 
 @end

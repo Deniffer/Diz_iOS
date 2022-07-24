@@ -107,7 +107,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:from];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:from];
-        UIImageView *courseImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"course_logo"]];
+        UIImageView *courseImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Course_logo"]];
         cell.backgroundColor = [UIColor colorWithWhite:15 alpha:.15];
         [cell.contentView addSubview:courseImageView];
     }

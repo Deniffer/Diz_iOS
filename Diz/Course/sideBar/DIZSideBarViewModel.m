@@ -28,6 +28,7 @@
     if (self = [super init]) {
         _api = [[DIZClassApi alloc] init];
         [self getFullCourses];
+        [self createCourseWithName:@"testCourse" duration:-1];
     }
     return self;
 }
@@ -48,6 +49,18 @@
                 return;
             }
             self.directories = [MTLJSONAdapter modelsOfClass:[DIZDirectoryModel class] fromJSONArray:responseObject[@""] error:nil];
+    }];
+}
+
+- (void)createCourseWithName:(NSString *)name duration:(NSInteger)duration {
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    dateformat.dateFormat = @"yyyy-MM-dd";
+    NSString *currentDate = [dateformat stringFromDate:[NSDate date]];
+
+    [self.api createCourseWithName:name createdAt:currentDate duration:duration callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            return;
+        }
     }];
 }
 
