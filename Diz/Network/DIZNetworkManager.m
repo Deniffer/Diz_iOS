@@ -6,12 +6,14 @@
 //
 
 #import "DIZNetworkManager.h"
+#import <AFNetworking/AFNetworking.h>
 
 BOOL NEED_DEBUG = YES;
-NSString *MOCKLOGIN = @"?mock_login=123";
+static NSString *MOCKLOGIN = @"?mock_login=123";
 
 @interface DIZNetworkManager()
 
+@property (nonatomic, copy) NSURL *baseUrl;
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 
 @end
@@ -20,13 +22,7 @@ NSString *MOCKLOGIN = @"?mock_login=123";
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl {
     if (self = [super init]) {
-        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseUrl];
-        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-        //[serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        //[serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        
-        _manager.requestSerializer = serializer;
-        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.baseUrl = baseUrl;
     }
     return self;
 }
@@ -49,20 +45,6 @@ NSString *MOCKLOGIN = @"?mock_login=123";
 
 - (void)POST:(NSString *)URLString params:(nullable NSDictionary *)params callback:(DIZNetworkCallbackBlock)callback {
     URLString = [self addMockLoginIfNeeded:URLString];
-//    [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [self.manager POST:URLString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//            !callback ?: callback(responseObject, nil);
-//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//            !callback ?: callback(nil, error);
-//    }];
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:URLString relativeToURL:self.manager.baseURL]];
-//    request.HTTPMethod = @"POST";
-//    request = [[AFJSONRequestSerializer serializer] requestBySerializingRequest:request withParameters:params error:nil];
-//    NSURLSessionDataTask *dataTask = nil;
-//    dataTask = [self.manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//        !callback ?: callback(responseObject, error);
-//    }];
-//    [dataTask resume];
     [self.manager POST:URLString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         !callback ?: callback(responseObject, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -86,6 +68,17 @@ NSString *MOCKLOGIN = @"?mock_login=123";
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             !callback ?: callback(nil, error);
     }];
+}
+
+#pragma mark -- Getter
+
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseUrl];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    }
+    return _manager;
 }
 
 @end

@@ -44,7 +44,6 @@
 
 @implementation DIZClassModel
 
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
         @"courseId" : @"course_id",
@@ -54,14 +53,23 @@
         @"inviteCode" : @"invite_code",
         @"createdDate" :@"created_at",
         @"members" : @"members",
+        //@"directories" : @[@"course_id",@"directory_id",@"name"],
         @"directories" : @"directories",
     };
 }
 
++ (NSValueTransformer *)directoriesJSONTransformer {
+//    return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+//        return [MTLJSONAdapter dictionaryTransformerWithModelClass:DIZDirectoryModel.class];
+//    }];
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[DIZDirectoryModel class]];
+}
+
+
+
 @end
 
 @implementation DIZCommentModel
-
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{

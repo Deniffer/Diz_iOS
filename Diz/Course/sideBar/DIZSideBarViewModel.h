@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DIZSideBarViewModel : NSObject
 
 @property (nonatomic, copy, readonly) NSArray<DIZClassModel *> *courses;
-@property (nonatomic, copy, readonly) NSArray<DIZDirectoryModel *> *directories;
+@property (nonatomic, strong, readonly) DIZClassModel *selectedCourse;
 
 - (void)getFullCourses;
 - (void)getCourseDetail:(NSUInteger)CourseId;

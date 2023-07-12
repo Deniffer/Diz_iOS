@@ -5,8 +5,7 @@
 //  Created by Deniffer on 2022/6/25.
 //
 
-#import <AFNetworking/AFNetworking.h>
-
+#import <Foundation/Foundation.h>
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^DIZNetworkCallbackBlock)(id _Nullable responseObject ,NSError * _Nullable error);

@@ -18,7 +18,6 @@ typedef void(^DIZNetworkCallbackBlock)(id _Nullable responseObject ,NSError * _N
 - (void)deleteCourseWithCourseId:(NSUInteger)courseId callback:(DIZNetworkCallbackBlock)callback;
 - (void)createCourseWithName:(NSString *)className createdAt:(NSString *)currentDate duration:(NSInteger)duration callback:(DIZNetworkCallbackBlock)callback;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

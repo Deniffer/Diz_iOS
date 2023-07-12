@@ -28,7 +28,7 @@
 #pragma mark -- Course Related API
 
 - (void)getCourses:(DIZNetworkCallbackBlock)callback {
-    [self.manager GET:@"/courses" params:nil callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
+    [self.manager POST:@"/get_courses" params:nil callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
         !callback ?: callback(responseObject,error);
     }];
 }
@@ -37,7 +37,7 @@
     NSDictionary *params = @{
         @"course_id": @(courseId)
     };
-    [self.manager GET:@"/course" params:params callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
+    [self.manager POST:@"/get_course_detail" params:params callback:^(id  _Nullable responseObject, NSError * _Nullable error) {
         !callback ?: callback(responseObject ,error);
     }];
 }
